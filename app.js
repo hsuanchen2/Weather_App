@@ -19,7 +19,7 @@ const daysOfWeek = [
 function createCard(name, weatherItem, index) {
   if (index == 0) {
     const dayInWeek = new Date(weatherItem.dt_txt);
-    console.log(dayInWeek.getDay());
+    // console.log(dayInWeek.getDay());
     return `
     <div class="weather-details">
     <h2>${name} ${weatherItem.dt_txt.split(" ")[0]}</h2>
@@ -40,7 +40,7 @@ function createCard(name, weatherItem, index) {
   } else {
     //   console.log("weatherItems", weatherItem);
     const dayInWeek = new Date(weatherItem.dt_txt);
-    console.log(dayInWeek.getDay());
+    // console.log(dayInWeek.getDay());
     return ` <li class="card">
     <h3>${weatherItem.dt_txt.split(" ")[0]}</h3>
     <h3>${daysOfWeek[dayInWeek.getDay()]}</h3>
@@ -75,8 +75,8 @@ async function getCityDetails(name, lat, lon) {
         dataSet.push(data.list[i].pop);
       }
     }
-    console.log("timeLabels", timeLabels);
-    console.log("pop", dataSet);
+    // console.log("timeLabels", timeLabels);
+    // console.log("pop", dataSet);
     createRainChart(timeLabels, dataSet);
     // console.log(data.list);
     const forecastDays = [];
@@ -89,7 +89,7 @@ async function getCityDetails(name, lat, lon) {
         return forecastDays.push(forecastDate);
       }
     });
-    console.log(fiveDaysForeCast);
+    // console.log(fiveDaysForeCast);
     userInput.value = "";
     weatherCardsContainer.innerHTML = "";
     currentWeatherCard.innerHTML = "";
@@ -111,27 +111,33 @@ async function getCityDetails(name, lat, lon) {
   }
 }
 
+// user input string validation
+function validateCityInput(city) {
+  const regex = /^[A-Za-z\s]+$/;
+  return regex.test(city);
+}
+
 // get serched city weather
 async function getCityWeather() {
-  let city;
-  if (city === "") {
+  let city = userInput.value.trim();
+  if (city === "" || !validateCityInput(city)) {
     errorText.classList.remove("-hide");
   } else {
     errorText.classList.add("-hide");
-    city = userInput.value.trim();
-  }
-  const API = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${api_key}`;
-  try {
-    const response = await fetch(API);
-    const data = await response.json();
-    // set multiple variables at once
-    const { name, lat, lon } = data[0];
-    // execute getCityDetails and pass details as arguments
-    getCityDetails(name, lat, lon);
-    localStorage.setItem("city", name);
-  } catch (error) {
-    console.log(error);
-    errorText.classList.remove("-hide");
+    // city = userInput.value.trim();
+    const API = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${api_key}`;
+    try {
+      const response = await fetch(API);
+      const data = await response.json();
+      // set multiple variables at once
+      const { name, lat, lon } = data[0];
+      // execute getCityDetails and pass details as arguments
+      getCityDetails(name, lat, lon);
+      localStorage.setItem("city", name);
+    } catch (error) {
+      // console.log(error);
+      errorText.classList.remove("-hide");
+    }
   }
 }
 
@@ -139,14 +145,14 @@ async function getCityWeather() {
 function getCurrentLocationWeather() {
   navigator.geolocation.getCurrentPosition(
     async (position) => {
-      console.log("success", position);
+      // console.log("success", position);
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
       const api = `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${api_key}`;
       try {
         const res = await fetch(api);
         const data = await res.json();
-        console.log("reverse", data);
+        // console.log("reverse", data);
         const name = data[0].name;
         // execute getCityDetails and pass details as arguments
         getCityDetails(name, lat, lon);
@@ -188,7 +194,7 @@ userInput.addEventListener("keyup", (e) => {
   e.keyCode == 13 && getCityWeather();
 });
 getPreviousCity();
-createPlaceHolderChart(); 
+createPlaceHolderChart();
 
 // Chart.js
 function createRainChart(timeLabels, dataSet) {
@@ -238,43 +244,52 @@ function createRainChart(timeLabels, dataSet) {
 function createPlaceHolderChart() {
   const oldCanvas = document.querySelector("#myCanvas");
   const oldChart = Chart.getChart(oldCanvas);
+  const previousCity = localStorage.getItem("city");
   if (oldChart) {
     oldChart.destroy();
   }
-
-  const ctx = document.querySelector("#myCanvas");
-  new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: ['06:00', '09:00', '12:00', '15:00', '18:00', '21:00'],
-      datasets: [
-        {
-          label: "Chance of Rain Today",
-          data: [1,1,1,1,1,1],
-          borderWidth: 0.5,
-          borderRadius: 5,
-        },
-      ],
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-          ticks: {
-            callback: function (value) {
-              return Math.floor(value * 100) + "%";
+  if (!previousCity) {
+    const ctx = document.querySelector("#myCanvas");
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["06:00", "09:00", "12:00", "15:00", "18:00", "21:00"],
+        datasets: [
+          {
+            label: "Chance of Rain Today",
+            data: [1, 1, 1, 1, 1, 1],
+            borderWidth: 0.5,
+            borderRadius: 5,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            gridLines: {
+              display: false,
+            },
+            beginAtZero: true,
+            ticks: {
+              callback: function (value) {
+                return Math.floor(value * 100) + "%";
+              },
+            },
+          },
+          x: {
+            gridLines: {
+              display: false,
             },
           },
         },
       },
-    },
-    tooltips: {
-      callbacks: {
-        label: function (tooltipItem) {
-          return tooltipItem.value + "%";
+      tooltips: {
+        callbacks: {
+          label: function (tooltipItem) {
+            return tooltipItem.value + "%";
+          },
         },
       },
-    },
-  });
+    });
+  }
 }
-
