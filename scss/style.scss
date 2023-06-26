@@ -1,0 +1,237 @@
+@import url(reset.css);
+
+// Colors
+$main-blue: #11aafe;
+$btn-blue: #5372f0;
+$bgc: #e3f2fd;
+$silver-grey: #c0c0c0;
+$bgc: #e3f2fd;
+$seperator-gery: #6c757d;
+
+* {
+  box-sizing: border-box;
+  font-family: 'Merriweather', serif !important;
+}
+
+body {
+  background: $bgc;
+}
+
+h1 {
+  font-size: 2rem;
+  background-color: $main-blue;
+  color: white;
+  text-align: center;
+  padding: 10px 0 10px 0;
+  font-weight: 600;
+}
+
+.wrapper {
+  max-width: 1240px;
+  margin: 30px auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-area {
+  width: 35%;
+  min-width: 250px;
+  position: relative;
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+  input {
+    width: 100%;
+    height: 45px;
+    outline: none;
+    padding: 0 15px;
+    margin: 10px 0 30px 0;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  .error-text {
+    position: absolute;
+    left: 0;
+    top: 85px;
+    font-size: 13px;
+    font-style: italic;
+    color: rgb(195, 62, 62);
+  }
+  .-hide {
+    display: none;
+  }
+  button {
+    width: 100%;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+    background-color: $btn-blue;
+    padding: 10px 0 10px 0;
+    border: none;
+    border-radius: 5px;
+  }
+  .btn-current-location {
+    background-color: #6c757d;
+  }
+  .seperator {
+    height: 1px;
+    width: 100%;
+    background-color: #bbb;
+    margin: 25px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .seperator:before {
+    content: "or";
+    color: $seperator-gery;
+    font-size: 1rem;
+    padding: 0 15px;
+    margin-top: -5px;
+    background: $bgc;
+  }
+  button.search-btn:hover {
+    background-color: #6E88FF;
+    transition: .2s;
+  }
+  button.btn-current-location:hover {
+    background-color: #7E878F;
+    transition: .2s;
+  }
+  #myCanvas {
+    width: 100%;
+    margin-top: 60px;
+    box-sizing: border-box;
+  }
+}
+
+
+.dashboard {
+  width: 60%;
+  // min-width: 420px;
+  .current-weather {
+    width: 100%;
+    color: white;
+    background-color: $btn-blue;
+    border-radius: 6px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 4px 4px 5px 0px rgba(143,143,143,1);
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 0.1rem;
+      line-height: 1.2;
+    }
+    h3 {
+      margin-top: 12px;
+    }
+    .weather-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+    .weather-icon {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      max-width: 130px;
+      img {
+        width: 100%;
+        margin-top: -15px;
+      }
+      h3 {
+        margin-top: -10px;
+        text-align: center;
+        text-transform: capitalize;
+      }
+    }
+  }
+
+  .forecast {
+    h2 {
+      font-size: 1.5rem;
+      margin: 20px 0;
+      font-weight: 600;
+    }
+    .weather-cards {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap; 
+      .card {
+        width: calc(100% / 5 - 10px);
+        background-color: #a7a7a7;
+        box-shadow: 4px 4px 5px 0px rgba(143,143,143,1);
+        border-radius: 5px;
+        padding: 20px 15px;
+        color: white;
+        margin-bottom: 20px;
+        h3 {
+          margin-bottom: 10px;
+        }
+        :nth-child(1) {
+          font-weight: 600;
+          font-size: 0.9rem;
+        }
+        img {
+          max-width: 100px;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        h3 {
+          font-size: 0.8rem;
+          letter-spacing: 0.1em;
+        }
+      }
+    }
+  }
+}
+
+// Media queries
+@media screen and (max-width: 1300px) {
+  .wrapper {
+    padding: 20px;
+  }
+  .dashboard .forecast .weather-cards {
+    flex-wrap: wrap;
+    gap:20px; 
+  }
+  .dashboard .forecast .weather-cards .card {
+    width: calc(100% / 4 - 15px);
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .dashboard .forecast .weather-cards .card {
+    width: calc(100% / 3 - 15px);
+  }
+} 
+
+@media screen and (max-width: 768px) {
+  .search-area {
+    #myCanvas {
+      margin-top: 30px;
+    }
+  }
+  .dashboard .forecast .weather-cards .card {
+    width: calc(100% / 2 - 15px);
+  }
+  .dashboard .forecast .weather-cards {
+    gap:30px; 
+  }
+  .wrapper {
+    flex-wrap: wrap;
+  }
+  .wrapper .search-area {
+    width: 100%;
+  }
+
+  .wrapper .dashboard {
+    width: 100%;
+    margin-top: 20px;
+  }
+}

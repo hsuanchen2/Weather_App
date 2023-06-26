@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./scss/style.css" />
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Weather App</title>
+  </head>
+  <body>
+    <h1>Weather Dashboard</h1>
+    <section class="wrapper">
+      <!-- Search Area -->
+      <div class="search-area">
+        <h2>Find Your Weather</h2>
+        <input
+          class="userInput"
+          type="text"
+          placeholder="City Weather Lookup"
+        />
+        <span class="error-text -hide">Please Enter a Valid City</span>
+        <button class="search-btn">Search</button>
+        <div class="seperator"></div>
+        <button class="btn-current-location">Discover Local Weather</button>
+        <canvas id="myCanvas"></canvas>
+      </div>
+
+      <!-- Dashboard Area -->
+      <div class="dashboard">
+        <div class="current-weather">
+          <div class="weather-details">
+            <h2>_____</h2>
+            <h3>Temperature:____°C</h3>
+            <h3>Wind: ____ M/S</h3>
+            <h3>Pop: ____%</h3>
+          </div>
+        </div>
+
+        <!-- Forecast -->
+        <div class="forecast">
+          <h2>5-Day Forecast</h2>
+          <ul class="weather-cards">
+            <li class="card">
+              <h3>( _____ )</h3>
+              <h3>Temp: __°C</h3>
+              <h3>Wind: __ M/S</h3>
+              <h3>Humiditiy: __%</h3>
+            </li>
+            <li class="card">
+              <h3>( _____ )</h3>
+              <h3>Temp: __°C</h3>
+              <h3>Wind: __ M/S</h3>
+              <h3>Humiditiy: __%</h3>
+            </li>
+            <li class="card">
+              <h3>( _____ )</h3>
+              <h3>Temp: __°C</h3>
+              <h3>Wind: __ M/S</h3>
+              <h3>Humiditiy: __%</h3>
+            </li>
+            <li class="card">
+              <h3>( _____ )</h3>
+              <h3>Temp: __°C</h3>
+              <h3>Wind: __ M/S</h3>
+              <h3>Humiditiy: __%</h3>
+            </li>
+            <li class="card">
+              <h3>( _____ )</h3>
+              <h3>Temp: __°C</h3>
+              <h3>Wind: __ M/S</h3>
+              <h3>Humiditiy: __%</h3>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Script -->
+    <script src="app.js"></script>
+  </body>
+</html>
