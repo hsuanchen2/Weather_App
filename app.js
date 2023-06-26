@@ -58,7 +58,7 @@ function createCard(name, weatherItem, index) {
 }
 
 async function getCityDetails(name, lat, lon) {
-  const API = `http://api.openweathermap.org/data/2.5/forecast/?lat=${lat}&lon=${lon}&appid=${api_key}`;
+  const API = `https://api.openweathermap.org/data/2.5/forecast/?lat=${lat}&lon=${lon}&appid=${api_key}`;
   try {
     const response = await fetch(API);
     const data = await response.json();
@@ -125,7 +125,7 @@ async function getCityWeather() {
   } else {
     errorText.classList.add("-hide");
     // city = userInput.value.trim();
-    const API = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${api_key}`;
+    const API = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${api_key}`;
     try {
       const response = await fetch(API);
       const data = await response.json();
@@ -148,7 +148,7 @@ function getCurrentLocationWeather() {
       // console.log("success", position);
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
-      const api = `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${api_key}`;
+      const api = `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${api_key}`;
       try {
         const res = await fetch(api);
         const data = await res.json();
@@ -176,7 +176,7 @@ async function getPreviousCity() {
   if (previousCity) {
     city = previousCity;
   }
-  const API = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${api_key}`;
+  const API = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${api_key}`;
   try {
     const response = await fetch(API);
     const data = await response.json();
