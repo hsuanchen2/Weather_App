@@ -234,6 +234,9 @@ function createRainChart(timeLabels, dataSet) {
       },
     },
   });
+  if (body.classList.contains("-dark")) {
+    chartDarkmode(myChart); 
+  }
 }
 
 // create fake placeholder chart
@@ -301,13 +304,6 @@ createPlaceHolderChart();
 
 // change chart color when switching to darkmode
 // Store the default chart colors
-const defaultChartColors = {
-  backgroundColor: "#8CCAF4",
-  titleColor: "lightgray",
-  legendLabelColor: "lightgray",
-  yAxisTickColor: "lightgray",
-  xAxisTickColor: "lightgray",
-};
 
 function chartDarkmode(myChart) {
   if (body.classList.contains("-dark")) {
