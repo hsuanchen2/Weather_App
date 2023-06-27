@@ -10,20 +10,63 @@ $seperator-gery: #6c757d;
 
 * {
   box-sizing: border-box;
-  font-family: 'Merriweather', serif !important;
 }
 
 body {
   background: $bgc;
+  font-family: "Merriweather", serif;
+  transition: 0.2s;
 }
 
-h1 {
-  font-size: 2rem;
+.-dark {
+  background-color: #2a2c3c;
+}
+
+nav {
   background-color: $main-blue;
-  color: white;
-  text-align: center;
-  padding: 10px 0 10px 0;
-  font-weight: 600;
+  .nav-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    #toggle {
+      display: none;
+    }
+    .dark-mode-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+      width: 75px;
+      height: 30px;
+      font-size: 18px;
+      border-radius: 50px;
+      padding: 0 12px;
+      background: linear-gradient(145deg, #e1e1e1, #fff);
+      background: linear-gradient(145deg, #e1e1e1, #fff);
+      .icon {
+        z-index: 1;
+      }
+      .ball {
+        position: absolute;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        left: 7px;
+        background-color: lightgray;
+        transition: 0.2s ease-out;
+      }
+    }
+  }
+  h1 {
+    max-width: 600px;
+    font-size: 2rem;
+    color: white;
+    padding: 10px 0 10px 0;
+    font-weight: 600;
+  }
 }
 
 .wrapper {
@@ -93,12 +136,12 @@ h1 {
     background: $bgc;
   }
   button.search-btn:hover {
-    background-color: #6E88FF;
-    transition: .2s;
+    background-color: #6e88ff;
+    transition: 0.2s;
   }
   button.btn-current-location:hover {
-    background-color: #7E878F;
-    transition: .2s;
+    background-color: #7e878f;
+    transition: 0.2s;
   }
   #myCanvas {
     width: 100%;
@@ -106,7 +149,6 @@ h1 {
     box-sizing: border-box;
   }
 }
-
 
 .dashboard {
   width: 60%;
@@ -119,7 +161,7 @@ h1 {
     padding: 20px;
     display: flex;
     justify-content: space-between;
-    box-shadow: 4px 4px 5px 0px rgba(143,143,143,1);
+    box-shadow: 4px 4px 5px 0px rgba(143, 143, 143, 1);
     h2 {
       font-size: 1.2rem;
       font-weight: 600;
@@ -160,11 +202,11 @@ h1 {
     .weather-cards {
       display: flex;
       gap: 12px;
-      flex-wrap: wrap; 
+      flex-wrap: wrap;
       .card {
         width: calc(100% / 5 - 10px);
         background-color: #a7a7a7;
-        box-shadow: 4px 4px 5px 0px rgba(143,143,143,1);
+        box-shadow: 4px 4px 5px 0px rgba(143, 143, 143, 1);
         border-radius: 5px;
         padding: 20px 15px;
         color: white;
@@ -198,7 +240,7 @@ h1 {
   }
   .dashboard .forecast .weather-cards {
     flex-wrap: wrap;
-    gap:20px; 
+    gap: 20px;
   }
   .dashboard .forecast .weather-cards .card {
     width: calc(100% / 4 - 15px);
@@ -209,7 +251,7 @@ h1 {
   .dashboard .forecast .weather-cards .card {
     width: calc(100% / 3 - 15px);
   }
-} 
+}
 
 @media screen and (max-width: 768px) {
   .search-area {
@@ -221,7 +263,7 @@ h1 {
     width: calc(100% / 2 - 15px);
   }
   .dashboard .forecast .weather-cards {
-    gap:30px; 
+    gap: 30px;
   }
   .wrapper {
     flex-wrap: wrap;
@@ -233,5 +275,35 @@ h1 {
   .wrapper .dashboard {
     width: 100%;
     margin-top: 20px;
+  }
+}
+
+// dark mode
+.-dark {
+  nav {
+    background-color: #4d44bd;
+  }
+  .search-area {
+    h2 {
+      color: white;
+    }
+    .seperator:before {
+      background: #2a2c3c;
+      color: white;
+    }
+  }
+  .ball {
+    transform: translateX(35px);
+  }
+  .dashboard .current-weather {
+    background-color: #53369e;
+    box-shadow: 4px 5px 5px 0px rgba(66, 66, 66, 1);
+  }
+  .dashboard .weather-cards .card {
+    background-color: #343950;
+    box-shadow: 4px 5px 5px 0px rgba(66, 66, 66, 1);
+  }
+  .forecast h2 {
+    color: white;
   }
 }

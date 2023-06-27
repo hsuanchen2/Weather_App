@@ -4,6 +4,8 @@ const errorText = document.querySelector(".error-text");
 const weatherCardsContainer = document.querySelector(".weather-cards");
 const currentWeatherCard = document.querySelector(".current-weather");
 const currentLocationBtn = document.querySelector(".btn-current-location");
+const body = document.querySelector("body");
+const toggle = document.querySelector("#toggle");
 
 const api_key = "4ae159cc8ffb524ac9c89a21134557b3";
 const daysOfWeek = [
@@ -197,7 +199,9 @@ getPreviousCity();
 createPlaceHolderChart();
 
 // Chart.js
+let myChart;
 function createRainChart(timeLabels, dataSet) {
+  // destroy oldchart before creating if there's one
   const oldCanvas = document.querySelector("#myCanvas");
   const oldChart = Chart.getChart(oldCanvas);
   if (oldChart) {
@@ -205,7 +209,7 @@ function createRainChart(timeLabels, dataSet) {
   }
 
   const ctx = document.querySelector("#myCanvas");
-  new Chart(ctx, {
+  myChart = new Chart(ctx, {
     type: "bar",
     data: {
       labels: timeLabels,
@@ -250,7 +254,7 @@ function createPlaceHolderChart() {
   }
   if (!previousCity) {
     const ctx = document.querySelector("#myCanvas");
-    new Chart(ctx, {
+    myChart = new Chart(ctx, {
       type: "bar",
       data: {
         labels: ["06:00", "09:00", "12:00", "15:00", "18:00", "21:00"],
@@ -293,3 +297,35 @@ function createPlaceHolderChart() {
     });
   }
 }
+
+// change chart color when switching to darkmode
+// Store the default chart colors
+const defaultChartColors = {
+  backgroundColor: "#8CCAF4",
+  titleColor: "lightgray",
+  legendLabelColor: "lightgray",
+  yAxisTickColor: "lightgray",
+  xAxisTickColor: "lightgray",
+};
+
+function chartDarkmode() {
+  if (body.classList.contains("-dark")) {
+    myChart.data.datasets[0].backgroundColor = "#6F61C0";
+    myChart.options.plugins.title.color = "#eee";
+    myChart.options.plugins.legend.labels.color = "#eee";
+    myChart.options.scales.y.ticks.color = "#eee";
+    myChart.options.scales.x.ticks.color = "#eee";
+  } else {
+    myChart.data.datasets[0].backgroundColor = "#BAC4CC";
+    myChart.options.plugins.title.color = "#9bd0f5";
+    myChart.options.plugins.legend.labels.color = "#666";
+    myChart.options.scales.y.ticks.color = "#666";
+    myChart.options.scales.x.ticks.color = "#666";
+  }
+  myChart.update();
+}
+// dark mode toggle
+toggle.addEventListener("change", () => {
+  body.classList.toggle("-dark");
+  chartDarkmode();
+});

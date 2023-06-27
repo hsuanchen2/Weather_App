@@ -1,18 +1,61 @@
 @import url(reset.css);
 * {
   box-sizing: border-box;
-  font-family: "Merriweather", serif !important;
 }
 
 body {
   background: #e3f2fd;
+  font-family: "Merriweather", serif;
+  transition: 0.2s;
 }
 
-h1 {
-  font-size: 2rem;
+.-dark {
+  background-color: #2a2c3c;
+}
+
+nav {
   background-color: #11aafe;
+}
+nav .nav-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav .nav-container #toggle {
+  display: none;
+}
+nav .nav-container .dark-mode-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  width: 75px;
+  height: 30px;
+  font-size: 18px;
+  border-radius: 50px;
+  padding: 0 12px;
+  background: linear-gradient(145deg, #e1e1e1, #fff);
+  background: linear-gradient(145deg, #e1e1e1, #fff);
+}
+nav .nav-container .dark-mode-toggle .icon {
+  z-index: 1;
+}
+nav .nav-container .dark-mode-toggle .ball {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  left: 7px;
+  background-color: lightgray;
+  transition: 0.2s ease-out;
+}
+nav h1 {
+  max-width: 600px;
+  font-size: 2rem;
   color: white;
-  text-align: center;
   padding: 10px 0 10px 0;
   font-weight: 600;
 }
@@ -85,11 +128,11 @@ h1 {
   background: #e3f2fd;
 }
 .search-area button.search-btn:hover {
-  background-color: #6E88FF;
+  background-color: #6e88ff;
   transition: 0.2s;
 }
 .search-area button.btn-current-location:hover {
-  background-color: #7E878F;
+  background-color: #7e878f;
   transition: 0.2s;
 }
 .search-area #myCanvas {
@@ -214,4 +257,28 @@ h1 {
     width: 100%;
     margin-top: 20px;
   }
+}
+.-dark nav {
+  background-color: #4d44bd;
+}
+.-dark .search-area h2 {
+  color: white;
+}
+.-dark .search-area .seperator:before {
+  background: #2a2c3c;
+  color: white;
+}
+.-dark .ball {
+  transform: translateX(35px);
+}
+.-dark .dashboard .current-weather {
+  background-color: #53369e;
+  box-shadow: 4px 5px 5px 0px rgb(66, 66, 66);
+}
+.-dark .dashboard .weather-cards .card {
+  background-color: #343950;
+  box-shadow: 4px 5px 5px 0px rgb(66, 66, 66);
+}
+.-dark .forecast h2 {
+  color: white;
 }/*# sourceMappingURL=style.css.map */
