@@ -39,11 +39,12 @@ nav {
       align-items: center;
       position: relative;
       cursor: pointer;
-      width: 75px;
+      min-width: 75px;
       height: 30px;
       font-size: 18px;
       border-radius: 50px;
       padding: 0 12px;
+      box-sizing: border-box;
       background: linear-gradient(145deg, #e1e1e1, #fff);
       background: linear-gradient(145deg, #e1e1e1, #fff);
       .icon {
@@ -244,6 +245,9 @@ nav {
   }
   .dashboard .forecast .weather-cards .card {
     width: calc(100% / 4 - 15px);
+  }
+  .nav-container {
+    padding: 0 20px;
   }
 }
 

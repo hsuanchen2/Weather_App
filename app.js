@@ -190,14 +190,6 @@ async function getPreviousCity() {
   }
 }
 
-searchBtn.addEventListener("click", getCityWeather);
-currentLocationBtn.addEventListener("click", getCurrentLocationWeather);
-userInput.addEventListener("keyup", (e) => {
-  e.keyCode == 13 && getCityWeather();
-});
-getPreviousCity();
-createPlaceHolderChart();
-
 // Chart.js
 let myChart;
 function createRainChart(timeLabels, dataSet) {
@@ -298,6 +290,15 @@ function createPlaceHolderChart() {
   }
 }
 
+searchBtn.addEventListener("click", getCityWeather);
+currentLocationBtn.addEventListener("click", getCurrentLocationWeather);
+userInput.addEventListener("keyup", (e) => {
+  e.keyCode == 13 && getCityWeather();
+});
+getPreviousCity();
+createPlaceHolderChart();
+
+
 // change chart color when switching to darkmode
 // Store the default chart colors
 const defaultChartColors = {
@@ -308,7 +309,7 @@ const defaultChartColors = {
   xAxisTickColor: "lightgray",
 };
 
-function chartDarkmode() {
+function chartDarkmode(myChart) {
   if (body.classList.contains("-dark")) {
     myChart.data.datasets[0].backgroundColor = "#6F61C0";
     myChart.options.plugins.title.color = "#eee";
@@ -316,7 +317,7 @@ function chartDarkmode() {
     myChart.options.scales.y.ticks.color = "#eee";
     myChart.options.scales.x.ticks.color = "#eee";
   } else {
-    myChart.data.datasets[0].backgroundColor = "#BAC4CC";
+    myChart.data.datasets[0].backgroundColor = "#8CCAF4";
     myChart.options.plugins.title.color = "#9bd0f5";
     myChart.options.plugins.legend.labels.color = "#666";
     myChart.options.scales.y.ticks.color = "#666";
@@ -325,7 +326,8 @@ function chartDarkmode() {
   myChart.update();
 }
 // dark mode toggle
-toggle.addEventListener("change", () => {
+function darkmodeToggle() {
   body.classList.toggle("-dark");
-  chartDarkmode();
-});
+  chartDarkmode(myChart);
+}
+toggle.addEventListener("change", darkmodeToggle);
